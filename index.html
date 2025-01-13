@@ -8,14 +8,15 @@
         body {
             margin: 0;
             font-family: 'Arial', sans-serif;
-            overflow: hidden;
+            overflow-y: hidden;
         }
         .slider {
             display: flex;
+            flex-direction: column;
             width: 100vw;
             height: 100vh;
-            overflow-x: hidden;
-            scroll-snap-type: x mandatory;
+            overflow-y: scroll;
+            scroll-snap-type: y mandatory;
             scroll-behavior: smooth;
         }
         .slide {
@@ -50,27 +51,6 @@
             text-align: center;
             max-width: 800px;
         }
-        .controls {
-            position: absolute;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            gap: 1rem;
-        }
-        .button {
-            background: white;
-            color: black;
-            border: none;
-            padding: 0.5rem 1rem;
-            font-size: 1rem;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-        .button:hover {
-            background: #ddd;
-        }
     </style>
 </head>
 <body>
@@ -88,34 +68,5 @@
             <p>Нейросети берут на себя составление типовых документов, анализ договоров и прогнозирование исходов дел.</p>
         </div>
     </div>
-
-    <div class="controls">
-        <button class="button" onclick="prevSlide()">&#9664; Назад</button>
-        <button class="button" onclick="nextSlide()">Вперёд &#9654;</button>
-    </div>
-
-    <script>
-        const slider = document.querySelector('.slider');
-        const slides = document.querySelectorAll('.slide');
-        let currentIndex = 0;
-
-        function nextSlide() {
-            if (currentIndex < slides.length - 1) {
-                currentIndex++;
-            } else {
-                currentIndex = 0;
-            }
-            slider.scrollTo({ left: window.innerWidth * currentIndex, behavior: 'smooth' });
-        }
-
-        function prevSlide() {
-            if (currentIndex > 0) {
-                currentIndex--;
-            } else {
-                currentIndex = slides.length - 1;
-            }
-            slider.scrollTo({ left: window.innerWidth * currentIndex, behavior: 'smooth' });
-        }
-    </script>
 </body>
 </html>
