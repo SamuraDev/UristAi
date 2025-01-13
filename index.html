@@ -31,6 +31,7 @@
             color: white;
             padding: 2rem;
             box-sizing: border-box;
+            position: relative;
         }
         .slide:nth-child(1) {
             background: linear-gradient(135deg, #ff7eb3, #ff758c);
@@ -51,22 +52,61 @@
             text-align: center;
             max-width: 800px;
         }
+        .popup {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 1rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            display: none;
+        }
+        .popup.active {
+            display: block;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
     </style>
 </head>
 <body>
     <div class="slider">
-        <div class="slide">
+        <div class="slide" data-popup="Нейросети экономят время и ресурсы, помогая юристам быть более эффективными.">
             <h1>Будущее в юриспруденции</h1>
             <p>Нейросети помогают юристам обрабатывать огромные объёмы данных с высокой скоростью и точностью, экономя время и ресурсы.</p>
+            <div class="popup"></div>
         </div>
-        <div class="slide">
+        <div class="slide" data-popup="Интеллектуальный поиск позволяет находить нужные данные за считанные секунды.">
             <h1>Интеллектуальный поиск</h1>
             <p>Современные алгоритмы позволяют находить нужную информацию в правовых базах быстрее, чем это делал бы человек.</p>
+            <div class="popup"></div>
         </div>
-        <div class="slide">
+        <div class="slide" data-popup="Автоматизация рутинных задач облегчает работу юристов.">
             <h1>Автоматизация рутинных задач</h1>
             <p>Нейросети берут на себя составление типовых документов, анализ договоров и прогнозирование исходов дел.</p>
+            <div class="popup"></div>
         </div>
     </div>
+    <script>
+        const slides = document.querySelectorAll('.slide');
+
+        slides.forEach(slide => {
+            slide.addEventListener('mouseenter', () => {
+                const popup = slide.querySelector('.popup');
+                const message = slide.getAttribute('data-popup');
+                popup.textContent = message;
+                popup.classList.add('active');
+            });
+
+            slide.addEventListener('mouseleave', () => {
+                const popup = slide.querySelector('.popup');
+                popup.classList.remove('active');
+            });
+        });
+    </script>
 </body>
 </html>
